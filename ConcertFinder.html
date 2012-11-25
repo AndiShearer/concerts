@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Concert Finder</title>
+
+  <!-- CSS -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  
+  <!-- JS -->
+  <script type="text/javascript" src="src/eventful.js"></script>
+  
+  <script type="text/javascript" src="lib/eventfulApi.js"></script>
+  <script type="text/javascript" src="lib/jQuery-1.8.3.js"></script>
+  <script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+		$('#form').submit(function() {
+			var artist = $('#artist').val();
+			queryArtist(artist);
+			return false;
+		});
+	});
+  </script>
+</head>
+
+<body>
+
+<form class="form-search" id="form">
+	<label for="artist">Band</label>
+	<input type="text" name="artist" id="artist" class="search-query">
+	<input type="submit" name="submit" id="submit" value="submit">
+</form>
+
+</body>
+</html>
