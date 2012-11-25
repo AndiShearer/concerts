@@ -19,6 +19,7 @@ function queryArtists(artists){
 	$('#fortschritt').show();
 	$('#queryNummer').text(0);	
 	$('#queriesGesamt').text(artists.length);
+	$('#progressBar').width(0);
 		
 	artistsToQuery = artists;
 	foundEvents = [];
@@ -28,11 +29,15 @@ function queryArtists(artists){
 function queryArtistsRecursive() {
 	if (artistsToQuery.length === 0) {
 		$('#fortschritt').hide();
+		$('#progressBar').width(0);
 		printFoundEvents();
 		return;
 	}
 	
 	$('#queryNummer').text(parseInt($('#queryNummer').text())+1);	
+	var currentNumber = parseInt($('#queryNummer').text());
+	var allNumbers = parseInt($('#queriesGesamt').text());
+	$('#progressBar').width(currentNumber / allNumbers * $('#fortschritt').width());
 	
 	queryApi(artistsToQuery.shift(), function(response) {
 		if (response.total_items !== "0") {
