@@ -30,7 +30,9 @@ function queryArtistsRecursive() {
 	if (artistsToQuery.length === 0) {
 		$('#fortschritt').hide();
 		$('#progressBar').width(0);
-		printFoundEvents();
+		if (!(foundEvents.length > 0)) {
+			print({title : "Keine Konzerte in Berlin gefunden", start_time : "", venue_name : ""});
+		}
 		return;
 	}
 	
@@ -49,6 +51,7 @@ function queryArtistsRecursive() {
 			} else {
 				foundEvents[foundEvents.length] = events;
 			}
+			print(events);
 		}
 		queryArtistsRecursive();
 	});
@@ -63,17 +66,9 @@ function queryApi(artist, callback) {
     };
     EVDB.API.call("/events/search", oArgs, callback);
 }
-
-function printFoundEvents(){
-	if (foundEvents.length > 0) {
-		print(foundEvents);
-	} else {
-		print({title : "Keine Konzerte in Berlin gefunden", start_time : "", venue_name : ""});
-	}
-}
  
 function print(events){
-	var table = createTable();
+	var table = $('#events');
 	if ($.isArray(events)) {
 		$.each(events, function(index, value) { 
 			table.append(createEventElement(value));
@@ -82,12 +77,6 @@ function print(events){
 	else {
 		table.append(createEventElement(events));
 	}
-	$('#events').append(table);
-}
-
-function createTable() {
-	return $('<table/>').addClass('table table-striped table-hover table-bordered')
-					.append($('<tbody/>'));
 }
 
 function createEventElement(event){
