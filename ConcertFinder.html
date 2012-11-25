@@ -6,9 +6,11 @@
 
   <!-- CSS -->
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="src/eventful.css" rel="stylesheet" media="screen">
   
   <!-- JS -->
   <script type="text/javascript" src="src/eventful.js"></script>
+  <script type="text/javascript" src="src/fileReader.js"></script>
   
   <script type="text/javascript" src="lib/eventfulApi.js"></script>
   <script type="text/javascript" src="lib/jQuery-1.8.3.js"></script>
@@ -16,23 +18,35 @@
   
   <script type="text/javascript">
     $(document).ready(function() {
-		$('#form').submit(function() {
-			var artist = $('#artist').val();
-			queryArtist(artist);
-			$('#artist').val("");
-			return false;
-		});
+		setupSingleArtistSearch();
+		setupDndListeners();	
 	});
+	
+	function resetGui() {
+		$('#events').empty();
+		$('#queriedArtists').empty();	
+	}
   </script>
 </head>
 
-<body>
 
+
+<body>
 <form class="form-search" id="form">
 	<label for="artist">Band</label>
 	<input type="text" name="artist" id="artist" class="search-query">
 	<input type="submit" name="submit" id="submit" value="Finde Konzerte in Berlin">
 </form>
 
+<div id="dropZone">Oder droppe .m3u8-File hier</div>
+<div id="queriedArtists"></div>
+
+<div id="fortschritt" style="display:none">
+	<span id="queryNummer"></span><span> / </span><span id="queriesGesamt"></span>
+</div>
+
+<div id="events"></div>
 </body>
+
+
 </html>

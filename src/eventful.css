@@ -1,0 +1,22 @@
+body {
+	padding: 20px 40px;
+}
+
+#dropZone{
+	border: 2px dashed #BBB;
+	border-radius: 5px;
+	padding: 25px;
+	text-align: center;
+	font: 20pt bold,"Vollkorn";
+	color: #BBB;
+}
+
+#queriedArtists {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#queriedArtists>.artist {
+	display: inline;
+	margin-left: 2em;
+}
