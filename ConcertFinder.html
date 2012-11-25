@@ -19,6 +19,7 @@
 		$('#form').submit(function() {
 			var artist = $('#artist').val();
 			queryArtist(artist);
+			$('#artist').val("");
 			return false;
 		});
 	});
@@ -30,7 +31,7 @@
 <form class="form-search" id="form">
 	<label for="artist">Band</label>
 	<input type="text" name="artist" id="artist" class="search-query">
-	<input type="submit" name="submit" id="submit" value="submit">
+	<input type="submit" name="submit" id="submit" value="Finde Konzerte in Berlin">
 </form>
 
 </body>

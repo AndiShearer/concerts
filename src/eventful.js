@@ -12,24 +12,26 @@ function queryArtist(artist) {
  }
  
 function processResponse(data){
-    feed = data.events.event;
-	print(feed);
+	if (data.total_items !== "0") {
+		feed = data.events.event;
+		print(feed);
+	} else {
+		print({title : "Keine Konzerte gefunden", start_time : "", venue_name : ""})
+	}
 }
  
 function print(events){
 	$('table').remove();
 
 	var table = createTable();
-	
 	if ($.isArray(events)) {
 		$.each(events, function(index, value) { 
-			table.append(createEventOutput(value));
+			table.append(createEventElement(value));
 		});
 	}
 	else {
-		table.append(createEventOutput(events));
+		table.append(createEventElement(events));
 	}
-	
 	$('body').append(table);
 }
 
@@ -38,6 +40,6 @@ function createTable() {
 					.append($('<tbody/>'));
 }
 
-function createEventOutput(event){
+function createEventElement(event){
 	return  event==null? "": "<tr><td>" + event.title + "</td><td>"  + event.start_time.slice(0, 10) + "</td><td>" + event.venue_name + "</td></tr>";
 }
