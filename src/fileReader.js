@@ -1,4 +1,4 @@
-function setupDndListeners() {
+function setupMultipleArtistsSearch() {
 	var dropZone = document.getElementById('dropZone');
 	dropZone.addEventListener('dragover', handleDragOver, false);
 	dropZone.addEventListener('drop', handleFileSelect, false);
