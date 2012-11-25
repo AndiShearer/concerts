@@ -55,6 +55,7 @@ function queryApi(artist, callback) {
     var oArgs = {
         app_key: APP_KEY,
         q: '"' + artist + '"',
+		category: "music,concert,live,show",
         page_size: 25,
 		location: "Berlin"
     };
