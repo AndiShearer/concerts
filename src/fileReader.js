@@ -1,28 +1,3 @@
-function setupMultipleArtistsSearch() {
-	var dropZone = document.getElementById('dropZone');
-	dropZone.addEventListener('dragover', handleDragOver, false);
-	dropZone.addEventListener('drop', handleFileSelect, false);
-}
-
-function handleFileSelect(evt) {
-	evt.stopPropagation();
-	evt.preventDefault();
-	
-	resetGui();
-	
-	var file = evt.dataTransfer.files[0]; 
-	extractArtists(file, function(artists){
-		queryArtists(artists);
-	});
-}
-
-function handleDragOver(evt) {
-	evt.stopPropagation();
-	evt.preventDefault();
-	
-	evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-}
-
 function extractArtists(file, callback) {
 	readFile(file, function(playlist) {
 		var artistsDuped = extractArtistsFromString(playlist);

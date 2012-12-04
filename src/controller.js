@@ -1,15 +1,44 @@
-var APP_KEY = "hgGsRVHKCBfDXmTv";
+function SearchForm($scope) {
+  $scope.text = '';
+  $scope.submit = function() {
+	startSingleArtistSearch(this.text);
+	this.text = '';
+    
+  };
+}
 
+angular.module('ConcertFinder', [])
+.directive('dropZone', function($document){
+	return function(scope, element, attr){
+		element.bind('drop', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			startPlaylistSearch(event.originalEvent.dataTransfer.files[0]);
+		});
+		element.bind('dragover', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			event.originalEvent.dataTransfer.dropEffect = 'copy'; 
+		});
+	}
+});
+
+
+
+var APP_KEY = "hgGsRVHKCBfDXmTv";
 var foundEvents = [];
 var artistsToQuery;
  
-function setupSingleArtistSearch() {
-	$('#form').submit(function() {
-		resetGui();
-		var artist = $('#artist').val();
-		queryArtists([artist]);
-		$('#artist').val("");
-		return false;
+ 
+function startSingleArtistSearch(artist) {
+	resetGui();
+	queryArtists([artist]);
+}
+
+function startPlaylistSearch(file) {
+	resetGui();
+	extractArtists(file, function(artists){
+		queryArtists(artists);
 	});
 }
 	
