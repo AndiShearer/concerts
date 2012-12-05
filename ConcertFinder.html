@@ -25,7 +25,7 @@
 <body>
 <form ng-submit="submit()" ng-controller="SearchForm" class="form-search" id="form">
 	<label for="artist">Band</label>
-	<input type="text" name="artist" id="artist" class="search-query">
+	<input ng-model="text" type="text" name="artist" id="artist" class="search-query">
 	<input type="submit" name="submit" id="submit" value="Finde Konzerte in Berlin">
 </form>
 

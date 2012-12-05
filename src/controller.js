@@ -1,13 +1,14 @@
-function SearchForm($scope) {
+function SearchForm($scope, concertFinderService) {
   $scope.text = '';
   $scope.submit = function() {
-	startSingleArtistSearch(this.text);
+	resetGui();
+	concertFinderService.queryArtists([this.text]);
 	this.text = '';
     
   };
 }
 
-angular.module('ConcertFinder', [])
+var myModule = angular.module('ConcertFinder', [])
 .directive('dropZone', function($document){
 	return function(scope, element, attr){
 		element.bind('drop', function(event){
@@ -22,6 +23,18 @@ angular.module('ConcertFinder', [])
 		});
 	}
 });
+
+myModule.factory('concertFinderService', function($rootScope){
+	var service = {};
+	service.artistsToQuery = [];
+	service.queryArtists = function(artists){
+		this.artistsToQuery = artists;
+		queryArtists(artists);
+	}
+	return service;
+});
+
+SearchForm.$inject = ['$scope', 'concertFinderService'];
 
 
 
